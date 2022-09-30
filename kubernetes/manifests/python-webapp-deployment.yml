@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-app-deployment
+  namespace: py-app
+  labels:
+    app: py-app
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: py-app
+  template:
+    metadata:
+      labels:
+        app: py-app
+    spec:
+      containers:
+      - name: py-app
+        image: PLACEHOLDER_PYTHON_WEBAPP_IMAGE
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4200
+        env:
+        - name: NAME
+          value: "Woon Hao"
+        - name: COLOR
+          value: "burlywood"
+        - name: PORT
+          value: "4200"
+      imagePullSecrets:
+      - name: ecr-credentials

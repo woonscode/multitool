@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: py-app-service
+  namespace: py-app
+  labels:
+    app: py-app
+  annotations:
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  selector:
+    app: py-app
+  ports:
+  - port: 4000
+    targetPort: 4200
+    protocol: TCP
+  type: ClusterIP
